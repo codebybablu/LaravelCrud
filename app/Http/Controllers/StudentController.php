@@ -40,7 +40,7 @@ class StudentController extends Controller
         return view('Student.edit',  compact('student'));
     }
     
-    public function update(Request $request, Student $student, $id){
+    public function update(Request $request,$id){
         
         $student = Student::find($id);
 
