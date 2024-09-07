@@ -16,7 +16,7 @@ class StudentsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             DB::table('students')->insert([
                 'name' => $faker->name,
                 'email' => $faker->email,
