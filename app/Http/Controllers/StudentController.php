@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class StudentController extends Controller
 {
     public function index(){
-        $students = Student::orderBy("id","desc")->paginate(5);
+        $students = Student::orderBy("id","desc")->paginate(3);
         return view('Student.index', compact('students'));
     }
     
