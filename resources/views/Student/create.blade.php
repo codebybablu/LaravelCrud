@@ -18,21 +18,30 @@
                 <h1>Create Student</h1>
               </div>
               <div class="card-body">
-                <form action="{{ route('student.store') }}" method="post">
+                <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
                   @csrf
+                  
                   <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" class="form-control" required>
                   </div>
+                  
                   <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
                   </div>
+                  
                   <div class="form-group">
                     <label for="address">Address:</label>
                     <input type="text" id="address" name="address" class="form-control" required>
                   </div>
-                  <button type="submit" class="btn btn-primary">Create Student</button>
+                  
+                  <div class="form-group">
+                    <label for="image">Upload Image:</label>
+                    <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Create Student</button>  
                 </form>
               </div>
             </div>

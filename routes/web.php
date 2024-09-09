@@ -7,7 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// working on pagination which is complete
 Route::controller(StudentController::class)->group(function () {
 Route::get('student', 'index')->name('index');
 Route::get('student/create', 'create')->name('student.create');

@@ -21,13 +21,22 @@ class StudentController extends Controller
         $validator  = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|string',
-            'address' => 'required|string|max:255'
+            'address' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Image validation rules
         ]);
         if($validator->passes()){
             $student = new Student();
             $student->name = $request->input('name');
             $student->email = $request->input('email');
             $student->address = $request->input('address');
+
+            if($request->hasFile('image')){
+                $image = $request->file('image');
+                $imageName = time(). '_' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/students'), $imageName);
+                $student->image = $imageName;
+            }
+
             $student->save();
             return redirect()->route('index');
         }else{
@@ -46,12 +55,26 @@ class StudentController extends Controller
         $validator  = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|string',
-            'address' => 'required|string|max:255'
+            'address' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' // Image validation rules
         ]);        
 
         $student->name = $request->name;
         $student->email = $request->email;
         $student->address = $request->address;
+        
+        // Handle image upload if an image is provided
+        if ($request->hasFile('image')) {
+            // Optionally, delete the old image if it exists
+            if ($student->image && file_exists(public_path('images/students/' . $student->image))) {
+                unlink(public_path('images/students/' . $student->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/students'), $imageName);
+            $student->image = $imageName; 
+        }
         $student->save();
         return redirect()->route('index');
     }

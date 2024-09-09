@@ -23,6 +23,7 @@
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">Address</th>
+                  <th scope="col">Image</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -36,6 +37,13 @@
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->address }}</td>
+                  <td>
+                    @if ($user->image)
+                        <img src="{{ asset('images/students/' . $user->image) }}" alt="Student Image" width="50" height="50"> <!-- Display image -->
+                    @else
+                        No Image
+                    @endif
+                </td>
                   <td>
                     <a href="{{ url('student/edit/' .$user->id) }}" class="btn btn-sm btn-primary">Edit</a>
                     <a onclick="return confirm('Do you want to delete or not?')" href="{{ url('student/delete/' .$user->id) }}" class="btn btn-sm btn-danger">Delete</a>
